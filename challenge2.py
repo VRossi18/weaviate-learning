@@ -4,7 +4,7 @@ import weaviate
 from weaviate import EmbeddedOptions 
 import os
 
-resp = request.get('https://raw.githubusercontent.com/weaviate-tutorials/intro-workshop/main/data/jeopardy_1k.json')
+resp = requests.get('https://raw.githubusercontent.com/weaviate-tutorials/intro-workshop/main/data/jeopardy_1k.json')
 data = json.loads(resp.text)
 
 client = weaviate.Client(embedded_options=EmbeddedOptions(), additional_headers={"X-OpenAI-Api-Key": os.environ["OPENAI_API_KEY"]})
@@ -59,3 +59,14 @@ spicy_foods = (client.query
                     .with_limit(4)
                     .do())
 
+double_jeopardy = (client.query
+                    .get("Question", ["question", "answer", "round"])
+                    .with_near_text("concepts": "spicy foods recipe")
+                    .with_additional(['distance'])
+                    .with_limit(3)
+                    .with_where({
+                        "path": ['round'],
+                        "operator": "Equal",
+                        "valueText": "Double Jeopardy!"
+                    })
+                    .do())
