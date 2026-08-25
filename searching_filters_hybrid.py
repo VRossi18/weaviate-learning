@@ -28,7 +28,8 @@ for o in response.objects:
 wvc.query.hybrid(
     query="science fiction",
     limit=2,
-    filters=filter
+    filters=filter,
+    alpha=0.5
 )
 
 client.close()
