@@ -26,3 +26,14 @@ services:
          EXTENSIONS_STORAGE_ORIGIN: http://weaviate:8080
          NEIGHBOR_OCCURRENCE_IGNORE_PERCENTILE: 5
          ENABLE_COMPOUND_SPLITTING: 'false'
+   ollama:
+      image: docker.io/ollama/ollama:latest
+      ports:
+         - '11434:11434'
+      volumes:
+         - ollama:/root/.ollama
+      environment:
+         OLLAMA_HOST: 0.0.0.0:11434
+
+volumes:
+   ollama:
