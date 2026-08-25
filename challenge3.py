@@ -14,8 +14,12 @@ class_obj = {
     }
 }
 
+if client.schema.exists("Challenge3"):
+    client.schema.delete_class("Challenge3")
+
 client.schema.create_class(class_obj)
 print(f"Class created? {client.schema.get()}")
+
 
 for img in os.listdir("Images/"):
     print(f"Processing {img}")
