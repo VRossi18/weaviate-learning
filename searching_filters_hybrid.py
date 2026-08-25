@@ -25,11 +25,15 @@ for o in response.objects:
     print(o.properties["description"][:50] + "...\n")                
 
 
-wvc.query.hybrid(
+movies.query.hybrid(
     query="science fiction",
     limit=2,
     filters=filter,
     alpha=0.5
+)
+
+llm_summary = movies.generate.single_prompt(
+    single_prompt="""Summarize the following movie: {response}""",
 )
 
 client.close()
