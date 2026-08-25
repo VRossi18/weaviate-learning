@@ -43,3 +43,5 @@ res = (client.query.get("ClipExample", ['text', '_additional {distance}'])
         .do())
 
 print(json.dumps(res, indent=2))
+
+IPython.display.Image(filename=f"Images/{res['data']['Get']['ClipExample'][0]['text']}", width=300)

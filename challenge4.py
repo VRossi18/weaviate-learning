@@ -30,19 +30,12 @@ with client.batch.configure() as batch:
             class_name="Question"
         )
 
-uuid = client.data_object.create(
-    data_object = {
-        'quesiton': "Leonardo da vinci was born in this country",
-        'answer': "Italy",
-        'category': 'Culture'
-    },
-    class_name="Question"
-)
+print(json.dumps(client.query.aggregate("Question").with_meta_count().do(), indent=2))
 
-client.data_object.update(uuid=uuid, class_name="Question", data_object={'answer': 'Florence, Italy'})
+res = (client.query.get("Question", ["question", "answer", "category"])
+                   .with_additional(['distance'])
+                   .with_near_text({"concepts": "questions about animals"})
+                   .with_limit(10)
+                   .do())
 
-data_object = client.data_object.get_by_id(uuid, class_name="Question", with_vector=True)
-print(json.dumps(data_object, indent=2))
-
-client.data_object.delete(uuid=uuid, class_name="Question")
-print(f"Object deleted with UUID: {uuid}")
+print(json.dumps(res, indent=2))
