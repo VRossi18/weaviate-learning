@@ -25,4 +25,10 @@ for o in response.objects:
     print(o.properties["description"][:50] + "...\n")                
 
 
+wvc.query.hybrid(
+    query="science fiction",
+    limit=2,
+    filters=filter
+)
+
 client.close()
