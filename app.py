@@ -1,4 +1,3 @@
-
 import streamlit as st
 import weaviate.classes as wvc
 from weaviate.util import generate_uuid5
@@ -61,12 +60,13 @@ try:
                 return_references=[synopsis_xref],
             )
 
-        for movie in response:
-            with st.expander(movie["title"]):
-                rating = movie["rating"]
-                movie_id = movie["movie_id"]
-                synopsis = "Synopsis here"
+        for movie in response.objects:
+            with st.expander(movie.properties["title"]):
+                rating = movie.properties["rating"]
+                movie_id = movie.properties["movie_id"]
                 st.write(f"**Movie rating**: {rating}, **ID**: {movie_id}")
+
+                synopsis = movie.references["hasSynopsis"].objects[0].properties["body"]
                 st.write("**Synopsis**")
                 st.write(synopsis[:200] + "...")
 
@@ -75,13 +75,23 @@ try:
 
         st.header("Movie details")
         title_input = st.text_input(label="Enter the movie row ID here (0-120)", value="")
-        if len(title_input) > 0:  
+        if len(title_input) > 0: 
+            movie_uuid = generate_uuid5(int(title_input))
 
-            title = "Desert Dance"
-            director = "Ahmed Al-Bakri"
-            rating = 4.5
-            movie_id = 18
-            year = 2014
+            movie = movies.query.fetch_object_by_id(
+                uuid=movie_uuid,
+                return_references=[
+                    wvc.query.QueryReference(
+                        link_on="hasSynopsis", return_properties=["body"]
+                    ),
+                ],
+            )
+
+            title = movie.properties["title"]
+            director = movie.properties["director"]
+            rating = movie.properties["rating"]
+            movie_id = movie.properties["movie_id"]
+            year = movie.properties["year"]
 
             st.header(title)
             st.write(f"Director: {director}")
@@ -90,7 +100,8 @@ try:
             st.write(f"Year: {year}")
 
             with st.expander("See synopsis"):
-                st.write("Movie synopsis goes here")
+                st.write(movie.references["hasSynopsis"].objects[0].properties["body"])
+
 
     with rec_tab:
         st.header("Recommend me a movie")
@@ -100,14 +111,30 @@ try:
         if len(search_string) > 0 and len(occasion) > 0:
             st.subheader("Recommendations")
 
-            st.write("Movie ABC is recommended here because..")
+            response = synopses.generate.hybrid(
+                query=search_string,
+                grouped_task=f"""
+                The user is looking to watch
+                {search_string} types of movies for {occasion}.
+                Provide a movie recommendation
+                based on the provided movie synopses.
+                """,
+                limit=3,
+                return_references=[
+                    wvc.query.QueryReference(
+                        link_on="forMovie", return_properties=["title", "movie_id", "description"]
+                    ),
+                ],
+            )
+
+            st.write(response.generated)
 
             st.subheader("Movies analysed")
-            for i, m in enumerate(["Movie 1...", "Movie 2...", "Movie 3..."]):
-                movie_title = m
-                movie_id = i
-                movie_description = "Movie description here"
+            for i, m in enumerate(response.objects):
+                movie_title = m.references["forMovie"].objects[0].properties["title"]
+                movie_id = m.references["forMovie"].objects[0].properties["movie_id"]
+                movie_description = m.references["forMovie"].objects[0].properties["description"]
                 with st.expander(f"Movie title: {movie_title}, ID: {movie_id}"):
                     st.write(movie_description)
 finally:
-    client.close() 
+    client.close()  
