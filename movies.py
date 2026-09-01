@@ -1,4 +1,6 @@
 import weaviate.classes as wvc
+import pandas as pd
+import uuid
 
 client = wvc.Client("http://localhost:8080")
 
@@ -34,5 +36,18 @@ client.collections.create(
         )
     ],
 )
+
+movie_df = pd.read_csv("movies.csv")
+movie_df.head()
+
+for index, row in movie_df.iterrows():
+    client.collections.movies.add(
+        title=row["title"],
+        description=row["description"],
+        movie_id=str(uuid.uuid4()),
+        year=row["year"],
+        rating=row["rating"],
+        director=row["director"],
+    )
 
 client.close()
