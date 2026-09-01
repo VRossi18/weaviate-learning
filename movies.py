@@ -1,11 +1,24 @@
 import weaviate.classes as wvc
 import pandas as pd
 import uuid
+from typing import List
 
 client = wvc.Client("http://localhost:8080")
 
 reviews = client.collections.create(
     name="reviews",
+    vectorizer_config=wvc.config.Configure.Vectorizer.text2vec_contextionary(),
+    generative_config=wvc.config.Configure.Generative.openai(),
+    properties=[
+        wvc.config.Property(
+            name="body",
+            data_type=wvc.config.DataType.TEXT,
+        )
+    ]
+)
+
+synopsis = client.collections.create(
+    name="synopsis",
     vectorizer_config=wvc.config.Configure.Vectorizer.text2vec_contextionary(),
     generative_config=wvc.config.Configure.Generative.openai(),
     properties=[
@@ -54,6 +67,11 @@ movies = client.collections.create(
             target_collection=reviews.name
         )
     ]
+)
+
+movies.config.add_reference(
+    name="hasReview",
+    target_collection=reviews.name
 )
 
 movie_df = pd.read_csv("movies.csv")
