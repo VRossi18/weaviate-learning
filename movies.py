@@ -4,7 +4,19 @@ import uuid
 
 client = wvc.Client("http://localhost:8080")
 
-client.collections.create(
+reviews = client.collections.create(
+    name="reviews",
+    vectorizer_config=wvc.config.Configure.Vectorizer.text2vec_contextionary(),
+    generative_config=wvc.config.Configure.Generative.openai(),
+    properties=[
+        wvc.config.Property(
+            name="body",
+            data_type=wvc.config.DataType.TEXT,
+        )
+    ]
+)
+
+movies = client.collections.create(
     name="movies",
     vectorizer_config=wvc.config.Configure.Vectorizer.text2vec_contextionary(),
     generative_config=wvc.config.Configure.Generative.openai(),
@@ -35,19 +47,36 @@ client.collections.create(
             skip_vectorization=True,
         )
     ],
+
+    references=[
+        wvc.config.ReferenceProperty(
+            name="hasReview",
+            target_collection=reviews.name
+        )
+    ]
 )
 
 movie_df = pd.read_csv("movies.csv")
 movie_df.head()
 
+movie_objects = List()
 for index, row in movie_df.iterrows():
-    client.collections.movies.add(
-        title=row["title"],
-        description=row["description"],
-        movie_id=str(uuid.uuid4()),
-        year=row["year"],
-        rating=row["rating"],
-        director=row["director"],
+    movie_uuid = str(uuid.uuid4())
+
+    prop = {
+        "title": row["title"],
+        "description": row["description"],
+        "year": row["year"],
+        "rating": row["rating"],
+        "director": row["director"],
+    }
+
+    data_obj = wvc.data.DataObject(
+        properties=prop,
+        uuid=movie_uuid,
     )
+    movie_objects.append(data_obj)
+    
+response = movies.data.insert_many(movie_objects)
 
 client.close()
