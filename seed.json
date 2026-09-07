@@ -1,0 +1,112 @@
+[
+   {
+      "id": "prod_101",
+      "name": "Tênis Running Ultralight Carbon X",
+      "brand": "Velocity",
+      "category": "Calçados",
+      "sport": "Corrida",
+      "price": 899.9,
+      "rating": 4.8,
+      "tags": ["maratona", "placa de carbono", "alta performance", "leveza"],
+      "description": "Tênis de corrida de alta performance projetado para maratonistas e atletas de elite. Conta com placa de fibra de carbono responsiva na entressola, amortecimento super macio e cabedal em malha respirável para máxima ventilação e propulsão."
+   },
+   {
+      "id": "prod_102",
+      "name": "Camiseta Térmica Dry-Fit Pro Compressão",
+      "brand": "AeroTech",
+      "category": "Vestuário",
+      "sport": "Fitness / Treino",
+      "price": 149.9,
+      "rating": 4.6,
+      "tags": ["compressão", "proteção uv", "controle térmico", "academia"],
+      "description": "Camiseta de compressão com tecnologia de regulação térmica e proteção UV50+. Ideal para treinos intensos, musculação e corridas em dias frios, mantendo os músculos aquecidos e acelerando a recuperação muscular."
+   },
+   {
+      "id": "prod_103",
+      "name": "Smartwatch GPS Multisport Endurance",
+      "brand": "Pulse",
+      "category": "Eletrônicos",
+      "sport": "Multiesporte",
+      "price": 1899.0,
+      "rating": 4.9,
+      "tags": ["gps", "frequência cardíaca", "à prova d'água", "bateria longa"],
+      "description": "Relógio inteligente esportivo com GPS integrado de alta precisão, monitoramento cardíaco contínuo, oxímetro e métricas avançadas de VO2 máx. Resiste até 100m de profundidade e conta com bateria que dura até 14 dias."
+   },
+   {
+      "id": "prod_104",
+      "name": "Bola de Futebol Oficial Match Pro Champions",
+      "brand": "KickMaster",
+      "category": "Equipamentos",
+      "sport": "Futebol",
+      "price": 279.9,
+      "rating": 4.7,
+      "tags": ["futebol de campo", "termofundida", "alta precisão", "oficial"],
+      "description": "Bola de futebol profissional com construção termofundida sem costuras, garantindo absorção zero de água e trajetória estável no ar. Revestimento em PU texturizado para melhor controle e aderência nas chuteiras."
+   },
+   {
+      "id": "prod_105",
+      "name": "Mochila de Hidratação Trail Run 10L",
+      "brand": "Summit",
+      "category": "Acessórios",
+      "sport": "Trail Running",
+      "price": 329.0,
+      "rating": 4.5,
+      "tags": ["trilha", "hidratação", "ajuste anatômico", "ultramaratona"],
+      "description": "Colete e mochila de hidratação ergonômica com reservatório de 2 litros incluso. Possui bolsos frontais para garrafas murchas (soft flasks), apito de emergência e fitas reflexivas para segurança em corridas noturnas na montanha."
+   },
+   {
+      "id": "prod_106",
+      "name": "Raquete de Tennis Tour Graphic Carbon",
+      "brand": "Vortex",
+      "category": "Equipamentos",
+      "sport": "Tênis",
+      "price": 1150.0,
+      "rating": 4.8,
+      "tags": ["grafeno", "controle", "spin", "quadra rápida"],
+      "description": "Raquete de tênis para jogadores intermediários e avançados que buscam equilíbrio entre controle e spin. Estrutura reforçada com fibra de carbono e tecnologia de absorção de impacto para prevenir lesões no cotovelo (tennis elbow)."
+   },
+   {
+      "id": "prod_107",
+      "name": "Tapete de Yoga Antiderrapante Eco Rubber 6mm",
+      "brand": "Zenith",
+      "category": "Acessórios",
+      "sport": "Yoga / Pilates",
+      "price": 219.9,
+      "rating": 4.9,
+      "tags": ["ecológico", "antiderrapante", "amortecimento", "borracha natural"],
+      "description": "Mat de yoga premium feito de borracha natural biodegradável e livre de PVC. Espessura de 6mm que oferece excelente amortecimento para as articulações e aderência máxima mesmo com suor excessivo durante o Hot Yoga."
+   },
+   {
+      "id": "prod_108",
+      "name": "Kit Kettlebell Ajustável Cast Iron 4kg a 18kg",
+      "brand": "IronGrip",
+      "category": "Equipamentos",
+      "sport": "Crossfit / Funcional",
+      "price": 549.0,
+      "rating": 4.7,
+      "tags": ["home gym", "força", "ajustável", "ferro fundido"],
+      "description": "Kettlebell ajustável com mecanismo de trava rápida, permitindo alternar facilmente o peso de 4kg a 18kg. Economiza espaço na sua academia em casa e é perfeito para treinos de força, condicionamento e kettlebell swings."
+   },
+   {
+      "id": "prod_109",
+      "name": "Bermuda Ciclismo Gel 3D Pro Padded",
+      "brand": "PedalX",
+      "category": "Vestuário",
+      "sport": "Ciclismo",
+      "price": 189.9,
+      "rating": 4.4,
+      "tags": ["forro em gel", "longa distância", "ciclismo de estrada", "mtb"],
+      "description": "Bermuda de ciclismo com forro anatômico em gel multidensidade 3D, desenvolvida para proporcionar conforto em pedaladas superiores a 4 horas. Tecido respirável com costuras planas para evitar o atrito na pele."
+   },
+   {
+      "id": "prod_1010",
+      "name": "Whey Protein Isolate 100% Pure 900g",
+      "brand": "NutriPerform",
+      "category": "Suplementos",
+      "sport": "Nutrição Esportiva",
+      "price": 199.0,
+      "rating": 4.8,
+      "tags": ["proteína", "hipertrofia", "zero açúcar", "recuperação"],
+      "description": "Proteína do soro do leite isolada de altíssima pureza e rápida absorção. Fornece 27g de proteína e 6g de BCAA por dose, ideal para ganho de massa magra e recuperação muscular pós-treino sem adição de açúcares."
+   }
+]
